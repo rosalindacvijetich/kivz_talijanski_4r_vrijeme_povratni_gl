@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Talijanski – 4. razred – Kviz</title>
+  <style>
+    :root{
+      --blue:#dff3ff;
+      --blue2:#7cc8ff;
+      --pink:#ffe1f0;
+      --green:#e4f8df;
+      --yellow:#fff4bf;
+      --ink:#213547;
+      --accent:#2b73d2;
+      --good:#1f9d55;
+      --bad:#d64545;
+      --card:#ffffff;
+      --border:#d9e3ef;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color:var(--ink);
+      background:linear-gradient(180deg,#f6fbff 0%, #fff8fc 100%);
+      line-height:1.5;
+    }
+    .wrap{max-width:1050px;margin:0 auto;padding:20px}
+    .hero{
+      background:linear-gradient(135deg,var(--blue),var(--pink));
+      border:3px solid #fff;
+      border-radius:24px;
+      padding:22px;
+      box-shadow:0 8px 24px rgba(0,0,0,.08);
+      text-align:center;
+    }
+    h1{margin:0 0 8px;font-size:clamp(1.8rem,4vw,3rem)}
+    .subtitle{font-size:1.1rem;margin:8px 0}
+    .note{background:#fff;border-radius:18px;padding:12px 16px;display:inline-block;margin-top:12px;border:2px dashed var(--blue2)}
+    .legend{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:20px 0;
+    }
+    .legend div{background:#fff;border-radius:16px;padding:12px;border:2px solid var(--border)}
+    .section-title{
+      margin:28px 0 12px;
+      background:var(--yellow);
+      border-radius:999px;
+      display:inline-block;
+      padding:8px 16px;
+      font-weight:700;
+      border:2px solid #f0d867;
+    }
+    .quiz{display:grid;gap:16px}
+    .qcard{
+      background:var(--card);
+      border:2px solid var(--border);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 4px 12px rgba(0,0,0,.05);
+    }
+    .qhead{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+    .qnum{font-weight:800;color:var(--accent);font-size:1.1rem}
+    .qtext{font-size:1.08rem;flex:1;min-width:250px}
+    .options{margin-top:14px;display:grid;gap:10px}
+    label.option{
+      display:flex;gap:10px;align-items:flex-start;
+      background:#fbfdff;
+      border:2px solid #dfe9f5;
+      border-radius:14px;
+      padding:10px 12px;
+      cursor:pointer;
+    }
+    label.option:hover{border-color:var(--blue2);background:#f1f9ff}
+    input[type="radio"]{margin-top:3px;transform:scale(1.2)}
+    .feedback{
+      margin-top:12px;padding:12px 14px;border-radius:14px;display:none;font-weight:600;
+    }
+    .feedback.good{display:block;background:#e8f9ef;border:2px solid #bde7ce;color:#166a3a}
+    .feedback.bad{display:block;background:#fff0f0;border:2px solid #f1c1c1;color:#9e2c2c}
+    .flower{font-size:1.3rem;margin-right:6px}
+    .clock-box{min-width:150px;text-align:center;background:#f9fcff;border:2px dashed #c7dff9;padding:8px;border-radius:14px}
+    .clock-caption{font-size:.95rem;color:#4b6280;margin-top:6px}
+    .actions{position:sticky;bottom:0;background:rgba(255,255,255,.92);backdrop-filter: blur(8px);padding:14px;border-top:2px solid #e7eef7;margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    button{
+      font:inherit;font-weight:700;border:none;border-radius:999px;padding:12px 20px;cursor:pointer;
+      box-shadow:0 4px 10px rgba(0,0,0,.08);
+    }
+    .primary{background:#3d8bfd;color:#fff}
+    .secondary{background:#ffe785;color:#4f3d00}
+    .ghost{background:#eef5ff;color:#1e4f9e}
+    .result{
+      margin:20px 0 10px;
+      background:#fff;border:3px solid #cde6ff;border-radius:20px;padding:18px;text-align:center;display:none;
+    }
+    .result.show{display:block}
+    .big-score{font-size:2rem;font-weight:800;color:#1e63c7}
+    .small{font-size:.95rem;color:#5a6980}
+    .hint{font-size:.96rem;color:#46576f;margin-top:6px}
+    .tag{display:inline-block;background:#edf7ff;color:#1e63c7;border-radius:999px;padding:3px 9px;font-size:.88rem;font-weight:700;margin-right:8px}
+    .footer-note{margin-top:16px;background:#f7fbff;border-left:6px solid #8ac1ff;padding:12px 14px;border-radius:12px}
+    @media (max-width:700px){
+      .qhead{flex-direction:column}
+      .clock-box{align-self:center}
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>Talijanski – 4. razred 🇮🇹</h1>
+    <div class="subtitle"><strong>Kviz / Quiz</strong>: <em>vrijeme na satu, andare, verbi riflessivi, vokabular iz lekcija</em></div>
+    <div class="note">
+      <strong>Upute / Istruzioni:</strong><br>
+      Pažljivo pročitaj pitanje i označi točan odgovor. / Leggi con attenzione e scegli la risposta giusta.<br>
+      U nekim pitanjima pogledaj sat. / In alcune domande guarda l'orologio.
+    </div>
+  </div>
+
+  <div class="legend">
+    <div><span class="tag">Vrijeme / L'ora</span> tre e un quarto, le tre e mezza, le tre meno un quarto…</div>
+    <div><span class="tag">Andare</span> andiamo <strong>in piscina</strong>, andiamo <strong>al cinema</strong>, vanno al parco…</div>
+    <div><span class="tag">Verbi riflessivi</span> svegliarsi, alzarsi, lavarsi, vestirsi, pettinarsi</div>
+    <div><span class="tag">Vokabular</span> pullman, lago, alberi, carta, bottiglia di vetro, bottiglia di plastica…</div>
+  </div>
+
+  <div class="section-title">Pitanja / Domande</div>
+  <div id="quiz" class="quiz"></div>
+
+  <div id="result" class="result"></div>
+
+  <div class="actions">
+    <button class="primary" onclick="checkQuiz()">Provjeri odgovore / Controlla</button>
+    <button class="secondary" onclick="showAnswers()">Prikaži točne odgovore / Mostra le risposte</button>
+    <button class="ghost" onclick="resetQuiz()">Ponovi kviz / Riprova</button>
+  </div>
+
+  <div class="footer-note">
+    <strong>Savjet za učenje:</strong> Kad riješiš kviz, naglas pročitaj točne rečenice na talijanskom. / Dopo il quiz, leggi ad alta voce le frasi corrette in italiano.
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    type:'mc',
+    category:'Vrijeme / L\'ora',
+    textHR:'Koliko je sati? Pogledaj sat.',
+    textIT:'Che ore sono? Guarda l\'orologio.',
+    clock:{hour:3, minute:15},
+    options:[
+      'Sono le tre e un quarto.',
+      'Sono le tre e mezza.',
+      'Sono le tre meno un quarto.'
+    ],
+    answer:0,
+    explain:'Na satu je 3:15 = tre e un quarto.'
+  },
+  {
+    type:'mc',
+    category:'Vrijeme / L\'ora',
+    textHR:'Koliko je sati? Pogledaj sat.',
+    textIT:'Che ore sono? Guarda l\'orologio.',
+    clock:{hour:6, minute:30},
+    options:[
+      'Sono le sei meno un quarto.',
+      'Sono le sei e mezza.',
+      'Sono le sei e un quarto.'
+    ],
+    answer:1,
+    explain:'Na satu je 6:30 = sei e mezza.'
+  },
+  {
+    type:'mc',
+    category:'Vrijeme / L\'ora',
+    textHR:'Koliko je sati? Pogledaj sat.',
+    textIT:'Che ore sono? Guarda l\'orologio.',
+    clock:{hour:2, minute:45},
+    options:[
+      'Sono le due e un quarto.',
+      'Sono le tre meno un quarto.',
+      'Sono le tre e un quarto.'
+    ],
+    answer:1,
+    explain:'2:45 se na talijanskom često kaže le tre meno un quarto.'
+  },
+  {
+    type:'mc',
+    category:'Vrijeme / L\'ora',
+    textHR:'Odaberi točnu rečenicu za 8:00.',
+    textIT:'Scegli la frase giusta per le 8:00.',
+    options:[
+      'Sono le otto.',
+      'Sono le otto e mezza.',
+      'Sono le otto meno un quarto.'
+    ],
+    answer:0,
+    explain:'8:00 = Sono le otto.'
+  },
+  {
+    type:'mc',
+    category:'Vrijeme / L\'ora',
+    textHR:'Odaberi točnu rečenicu za 7:45.',
+    textIT:'Scegli la frase giusta per le 7:45.',
+    options:[
+      'Sono le sette e un quarto.',
+      'Sono le sette e mezza.',
+      'Sono le otto meno un quarto.'
+    ],
+    answer:2,
+    explain:'7:45 = otto meno un quarto.'
+  },
+  {
+    type:'mc',
+    category:'Andare',
+    textHR:'Dopuni: Noi ______ piscina.',
+    textIT:'Completa: Noi ______ piscina.',
+    options:['andiamo al', 'andiamo in', 'andiamo a'],
+    answer:1,
+    explain:'Kažemo andiamo in piscina = idemo na bazen.'
+  },
+  {
+    type:'mc',
+    category:'Andare',
+    textHR:'Dopuni: Sabato andiamo ______ cinema.',
+    textIT:'Completa: Sabato andiamo ______ cinema.',
+    options:['al', 'in', 'a'],
+    answer:0,
+    explain:'Kažemo al cinema = a + il cinema.'
+  },
+  {
+    type:'mc',
+    category:'Andare',
+    textHR:'Dopuni prema tekstu: I ragazzi vanno ______ Parco dei Laghetti.',
+    textIT:'Completa: I ragazzi vanno ______ Parco dei Laghetti.',
+    options:['al', 'in', 'a'],
+    answer:0,
+    explain:'Kaže se al Parco dei Laghetti.'
+  },
+  {
+    type:'mc',
+    category:'Verbi riflessivi',
+    textHR:'Odaberi točan oblik: Francesco ______ alle 6:30.',
+    textIT:'Scegli la forma giusta: Francesco ______ alle 6:30.',
+    options:['si sveglia', 'sveglia', 'mi sveglio'],
+    answer:0,
+    explain:'Za 3. lice jednine kažemo si sveglia.'
+  },
+  {
+    type:'mc',
+    category:'Verbi riflessivi',
+    textHR:'Odaberi točan oblik: Io ______ e vado in bagno.',
+    textIT:'Scegli la forma giusta: Io ______ e vado in bagno.',
+    options:['ti alzi', 'mi alzo', 'si alza'],
+    answer:1,
+    explain:'Za io ide mi alzo.'
+  },
+  {
+    type:'mc',
+    category:'Verbi riflessivi',
+    textHR:'Odaberi točan oblik: Noi ______ i denti.',
+    textIT:'Scegli la forma giusta: Noi ______ i denti.',
+    options:['ci laviamo', 'vi lavate', 'si lavano'],
+    answer:0,
+    explain:'Za noi ide ci laviamo.'
+  },
+  {
+    type:'mc',
+    category:'Verbi riflessivi',
+    textHR:'Odaberi točan oblik: Voi ______ in modo sportivo.',
+    textIT:'Scegli la forma giusta: Voi ______ in modo sportivo.',
+    options:['vi vestite', 'ci vestiamo', 'si veste'],
+    answer:0,
+    explain:'Za voi ide vi vestite.'
+  },
+  {
+    type:'mc',
+    category:'Verbi riflessivi',
+    textHR:'Koji je glagol povratni? / Quale verbo è riflessivo?',
+    textIT:'Koji je glagol povratni? / Quale verbo è riflessivo?',
+    options:['fare colazione', 'pettinarsi', 'prendere il pullman'],
+    answer:1,
+    explain:'Pettinarsi završava na -si i znači češljati se.'
+  },
+  {
+    type:'mc',
+    category:'Verbi riflessivi',
+    textHR:'Koji glagol NIJE povratni? / Quale verbo NON è riflessivo?',
+    textIT:'Quale verbo NON è riflessivo?',
+    options:['alzarsi', 'vestirsi', 'fare la doccia'],
+    answer:2,
+    explain:'Fare la doccia nije povratni glagol.'
+  },
+  {
+    type:'mc',
+    category:'Vokabular',
+    textHR:'Što znači pullman?',
+    textIT:'Che cosa significa pullman?',
+    options:['vlak', 'autobus', 'bicikl'],
+    answer:1,
+    explain:'Pullman = autobus.'
+  },
+  {
+    type:'mc',
+    category:'Vokabular',
+    textHR:'Dovrši rečenicu prema tekstu: I ragazzi prendono i sacchi e i rastrelli e vanno a pulire ______.',
+    textIT:'Completa: I ragazzi prendono i sacchi e i rastrelli e vanno a pulire ______.',
+    options:['la scuola e il cinema', 'il parco e il lago', 'la casa e il giardino'],
+    answer:1,
+    explain:'U tekstu piše: pulire il parco e il lago.'
+  },
+  {
+    type:'mc',
+    category:'Vokabular',
+    textHR:'Što rade Tommaso i Francesco?',
+    textIT:'Che cosa fanno Tommaso e Francesco?',
+    options:['Piantano alberi.', 'Mangiano la colazione.', 'Guardano la TV.'],
+    answer:0,
+    explain:'Na slici i u tekstu piše: Noi piantiamo alberi.'
+  },
+  {
+    type:'mc',
+    category:'Vokabular',
+    textHR:'U koji bidon ide la bottiglia di vetro?',
+    textIT:'In quale bidone va la bottiglia di vetro?',
+    options:['u zeleni / nel bidone verde', 'u plavi / nel bidone blu', 'u smeđi / nel bidone marrone'],
+    answer:0,
+    explain:'La bottiglia di vetro ide nel bidone verde.'
+  },
+  {
+    type:'mc',
+    category:'Vokabular',
+    textHR:'Što znači la carta?',
+    textIT:'Che cosa significa la carta?',
+    options:['staklo', 'papir', 'plastika'],
+    answer:1,
+    explain:'La carta = papir.'
+  },
+  {
+    type:'mc',
+    category:'Mješovito',
+    textHR:'Odaberi potpuno točnu rečenicu.',
+    textIT:'Scegli la frase completamente corretta.',
+    options:[
+      'Alle 6:30 Francesco si sveglia e si alza.',
+      'Alle 6:30 Francesco sveglia e alza.',
+      'Alle 6:30 Francesco mi sveglio e mi alzo.'
+    ],
+    answer:0,
+    explain:'Za Francesco (3. lice jd.) koristimo si sveglia i si alza.'
+  }
+];
+
+const praise = [
+  '🌼 Bravooo! / Bravo!',
+  '🌸 Odlično! / Benissimo!',
+  '🌷 Super! / Perfetto!',
+  '🌺 Točno! / Giusto!',
+  '💐 Sjajno! / Complimenti!'
+];
+
+function renderClockSVG(hour, minute) {
+  const size = 120;
+  const cx = 60, cy = 60, r = 50;
+  const hourAngle = ((hour % 12) + minute / 60) * 30;
+  const minuteAngle = minute * 6;
+  function polar(angleDeg, length){
+    const rad = (angleDeg - 90) * Math.PI / 180;
+    return {x: cx + length * Math.cos(rad), y: cy + length * Math.sin(rad)};
+  }
+  const h = polar(hourAngle, 26);
+  const m = polar(minuteAngle, 38);
+  let ticks = '';
+  for(let i=0;i<12;i++){
+    const a = i*30;
+    const p1 = polar(a, 42);
+    const p2 = polar(a, 48);
+    ticks += `<line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}" stroke="#486281" stroke-width="${i%3===0?3:2}" stroke-linecap="round" />`;
+  }
+  let nums = '';
+  for(let i=1;i<=12;i++){
+    const p = polar(i*30, 33);
+    nums += `<text x="${p.x}" y="${p.y+5}" text-anchor="middle" font-size="10" font-family="Trebuchet MS, Arial" fill="#3f5674">${i}</text>`;
+  }
+  return `
+  <svg width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="54" fill="#ffffff" stroke="#8ac1ff" stroke-width="4"/>
+    <circle cx="60" cy="60" r="50" fill="#f9fcff" stroke="#dcecff" stroke-width="2"/>
+    ${ticks}
+    ${nums}
+    <line x1="60" y1="60" x2="${h.x}" y2="${h.y}" stroke="#264c7d" stroke-width="5" stroke-linecap="round"/>
+    <line x1="60" y1="60" x2="${m.x}" y2="${m.y}" stroke="#d24b62" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="60" cy="60" r="4" fill="#264c7d"/>
+  </svg>`;
+}
+
+function buildQuiz(){
+  const quiz = document.getElementById('quiz');
+  quiz.innerHTML='';
+  questions.forEach((q, idx)=>{
+    const card = document.createElement('div');
+    card.className='qcard';
+    let optionsHTML = q.options.map((opt, i)=>`
+      <label class="option">
+        <input type="radio" name="q${idx}" value="${i}">
+        <span>${opt}</span>
+      </label>`).join('');
+    let clockHTML = '';
+    if(q.clock){
+      clockHTML = `<div class="clock-box">${renderClockSVG(q.clock.hour,q.clock.minute)}<div class="clock-caption">Orologio / Sat</div></div>`;
+    }
+    card.innerHTML = `
+      <div class="qhead">
+        <div class="qtext">
+          <div class="qnum">${idx+1}. <span class="small">${q.category}</span></div>
+          <div><strong>HR:</strong> ${q.textHR}</div>
+          <div><strong>IT:</strong> ${q.textIT}</div>
+        </div>
+        ${clockHTML}
+      </div>
+      <div class="options">${optionsHTML}</div>
+      <div id="fb${idx}" class="feedback"></div>
+    `;
+    quiz.appendChild(card);
+  });
+}
+
+function checkQuiz(showCorrect=false){
+  let correct=0;
+  let answered=0;
+  questions.forEach((q, idx)=>{
+    const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+    const fb = document.getElementById(`fb${idx}`);
+    if(selected){
+      answered++;
+      const chosen = Number(selected.value);
+      if(chosen===q.answer){
+        correct++;
+        const cheer = praise[idx % praise.length];
+        fb.className='feedback good';
+        fb.innerHTML=`<span class="flower">${cheer.split(' ')[0]}</span>${cheer.replace(/^\S+\s/,'')}<div class="hint">${q.explain}</div>`;
+      } else {
+        fb.className='feedback bad';
+        fb.innerHTML=`<strong>Probaj još! / Riprova!</strong><div class="hint">${showCorrect ? 'Točan odgovor: <strong>'+q.options[q.answer]+'</strong><br>' : ''}${q.explain}</div>`;
+      }
+    } else {
+      fb.className='feedback bad';
+      fb.innerHTML=`<strong>Nedostaje odgovor. / Manca la risposta.</strong>${showCorrect ? '<div class="hint">Točan odgovor: <strong>'+q.options[q.answer]+'</strong></div>' : ''}`;
+    }
+  });
+  const result = document.getElementById('result');
+  const percent = Math.round(correct/questions.length*100);
+  let msg = '';
+  if(percent===100) msg = 'Fantastično! / Fantastico! 🌟';
+  else if(percent>=80) msg = 'Jako dobro! / Molto bene! 😊';
+  else if(percent>=60) msg = 'Dobro ide! / Bene! Nastavi vježbati!';
+  else msg = 'Samo hrabro! / Coraggio! Ponovi gradivo i pokušaj opet.';
+  result.className='result show';
+  result.innerHTML = `
+    <div class="big-score">${correct} / ${questions.length}</div>
+    <div><strong>${percent}%</strong></div>
+    <p>${msg}</p>
+    <div class="small">Odgovoreno: ${answered} / ${questions.length}</div>
+  `;
+  result.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function showAnswers(){
+  checkQuiz(true);
+  questions.forEach((q, idx)=>{
+    const labels = document.querySelectorAll(`input[name="q${idx}"]`);
+    labels.forEach((input, i)=>{
+      input.parentElement.style.borderColor = i===q.answer ? '#6dc48d' : '#dfe9f5';
+      if(i===q.answer) input.parentElement.style.background = '#effcf3';
+    });
+  });
+}
+
+function resetQuiz(){
+  document.querySelectorAll('input[type="radio"]').forEach(r=>r.checked=false);
+  document.querySelectorAll('.feedback').forEach(f=>{f.className='feedback';f.innerHTML='';});
+  document.querySelectorAll('.option').forEach(l=>{l.style.borderColor='';l.style.background='';});
+  const result = document.getElementById('result');
+  result.className='result'; result.innerHTML='';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
